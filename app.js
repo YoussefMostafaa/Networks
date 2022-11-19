@@ -1,6 +1,7 @@
 var express = require('express');
 var path = require('path');
-const { MongoClient } = require('mongodb');
+const  MongoClient  = require('mongodb').MongoClient;
+
 
 var app = express();
 
@@ -15,38 +16,29 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 
+MongoClient.connect("mongodb+srv://Youssef:youssef12@cluster0.rtyfifa.mongodb.net/test", function (err, client) {
+    if (err) throw err ;
 
+    const db = client.db('new') ;
+    const collection = db.collection('collection1');
+    app.locals.collection = collection ; } ) 
 
 
 
 
 app.post('/register',function(req,res){
-
-
-
     
-  MongoClient.connect("mongodb://127.0.0.1:27017", function (err, client) {
-    if (err) throw err ;
-
-    const users = client.db('new').collection('collection1');
-
-    users.findOne(req.body,function(error,user){
-
-      if(!user) {console.log('User not found'); users.insertOne(req.body);  }
-
-      if(user) console.log('User found');
-      
-
+  const Collection = req.app.locals.collection ;  
+  
+  const userid  = req.body.username ;
+  console.log(userid);
+  //check if user already exists
+  Collection.findOne({username : userid},function(error,user){
+    if(user){ return res.render('registration',{error : "Sorry, Username already exists"});   }
+    Collection.insertOne(req.body);
+    res.render('register', {message : "Account Created Successfully"});
+    });     
     });
-
-      
-    });
-
-    res.render('register');
-
-
-
-});
 
 
 
@@ -106,7 +98,7 @@ app.get('/paris',function(req,res){
 });
 
 app.get('/registration',function(req,res){
-  res.render('registration');
+  res.render('registration',{error:""});
 });
 
 app.get('/rome',function(req,res){
@@ -132,6 +124,6 @@ if(process.env.PORT){
 }
 else{
   app.listen(3000,function(){console.log('server started on port 3000')});
-}
+} 
 
 
