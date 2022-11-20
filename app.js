@@ -158,7 +158,10 @@ app.post('/annapurnago',function(req,res){
     });
 });
 
-
+app.post('/homebutton',function(req,res){
+  const user = req.app.locals.user ;
+  res.render('home',{user});
+});
 
 app.get('/cities',function(req,res){
   const user = req.app.locals.user ;
