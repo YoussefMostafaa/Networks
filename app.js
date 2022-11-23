@@ -17,7 +17,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 
-MongoClient.connect("mongodb+srv://Youssef:youssef12@cluster0.rtyfifa.mongodb.net/test", function (err, client) {
+MongoClient.connect("mongodb+srv://admin:admin@cluster0.rtyfifa.mongodb.net/test", function (err, client) {
     if (err) throw err ;
 
     const db = client.db('new') ;
