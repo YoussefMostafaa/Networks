@@ -40,7 +40,7 @@ app.post('/register',function(req,res){
     if(userid == "" || userpass == "" ){ return res.render('registration',{error : "Missing Cridientials"});   }
 
     if(user){ return res.render('registration',{error : "Sorry, Username already exists, please choose another Username"});   }
-    Collection.insertOne(req.body);
+    Collection.insertOne({username: req.body.username ,password : req.body.password ,want_to_go:[]});
     res.render('login', {error : "Account Created Successfully, you can login now"});
     });     
     });
@@ -81,156 +81,227 @@ app.post('/login',function(req,res){
 
 
 app.post('/baligo',function(req,res){
-  const user = req.app.locals.user ;
+  var user = req.app.locals.user ;
   const Collection = req.app.locals.collection ;  
   Collection.findOne({username : user.username , want_to_go : "bali" },function(err,user2){
     if(err) throw err ;
     if(!user2){ 
       Collection.updateMany({username:user.username}, { $push: { "want_to_go": "bali" } });
-      res.render('bali', { user,error: "Alf mabrook hateb2a troo7 bali 7ader" });}
+      app.locals.user.want_to_go.push("bali");
+      res.render('bali', { user,error: "Alf mabrook hateb2a troo7 bali 7ader" });
+ /*      Collection.findOne({username : user.username },function(err,user3){
+        app.locals.user = user3 ;
+       // user = user3 ;
+       console.log(user3);
+        console.log(app.locals);
+        res.render('bali', { user,error: "Alf mabrook hateb2a troo7 bali 7ader" });
+        }); */
+}
     if(user2){
-    res.render('bali', { user,error: "manta olt 3ayz tro7ha 5alas 3refna" }); }
+    res.render('bali', { user2,error: "manta olt 3ayz tro7ha 5alas 3refna" }); }
     });
 });
 
 app.post('/incago',function(req,res){
-  const user = req.app.locals.user ;
+  var user = req.app.locals.user ;
   const Collection = req.app.locals.collection ;  
   Collection.findOne({username : user.username , want_to_go : "inca" },function(err,user2){
     if(err) throw err ;
     if(!user2){ 
       Collection.updateMany({username:user.username}, { $push: { "want_to_go": "inca" } });
-      res.render('inca', { user,error: "Alf mabrook hateb2a troo7 inca 7ader" });}
+      app.locals.user.want_to_go.push("inca");
+      res.render('inca', { user,error: "Alf mabrook hateb2a troo7 inca 7ader" });
+/*       Collection.findOne({username : user.username },function(err,user3){
+        app.locals.user= user3 ;
+       // user = user3 ;
+       console.log(user3);
+        console.log(app.locals);
+        res.render('inca', { user,error: "Alf mabrook hateb2a troo7 inca 7ader" });
+        }); */
+}
     if(user2){
-    res.render('inca', { user,error: "manta olt 3ayz tro7ha 5alas 3refna" }); }
+    res.render('inca', { user2,error: "manta olt 3ayz tro7ha 5alas 3refna" }); }
     });
 });
 
 app.post('/parisgo',function(req,res){
-  const user = req.app.locals.user ;
+  var user = req.app.locals.user ;
   const Collection = req.app.locals.collection ;  
   Collection.findOne({username : user.username , want_to_go : "paris" },function(err,user2){
     if(err) throw err ;
     if(!user2){ 
       Collection.updateMany({username:user.username}, { $push: { "want_to_go": "paris" } });
-      res.render('paris', { user,error: "Alf mabrook hateb2a troo7 paris 7ader" });}
+      app.locals.user.want_to_go.push("paris");
+      res.render('paris', { user,error: "Alf mabrook hateb2a troo7 paris 7ader" });
+/*       Collection.findOne({username : user.username },function(err,user3){
+        app.locals.user= user3 ;
+       // user = user3 ;
+       console.log(user3);
+        console.log(app.locals);
+        res.render('paris', { user,error: "Alf mabrook hateb2a troo7 paris 7ader" });
+        }); */
+}
     if(user2){
-    res.render('paris', { user,error: "manta olt 3ayz tro7ha 5alas 3refna" }); }
+    res.render('paris', { user2,error: "manta olt 3ayz tro7ha 5alas 3refna" }); }
     });
 });
 
 app.post('/santorinigo',function(req,res){
-  const user = req.app.locals.user ;
+  var user = req.app.locals.user ;
   const Collection = req.app.locals.collection ;  
   Collection.findOne({username : user.username , want_to_go : "santorini" },function(err,user2){
     if(err) throw err ;
     if(!user2){ 
       Collection.updateMany({username:user.username}, { $push: { "want_to_go": "santorini" } });
-      res.render('santorini', { user,error: "Alf mabrook hateb2a troo7 santorini 7ader" });}
+      app.locals.user.want_to_go.push("santorini");
+      res.render('santorini', { user,error: "Alf mabrook hateb2a troo7 santorini 7ader" });
+/*       Collection.findOne({username : user.username },function(err,user3){
+        app.locals.user= user3 ;
+       // user = user3 ;
+       console.log(user3);
+        console.log(app.locals);
+        res.render('santorini', { user3,error: "Alf mabrook hateb2a troo7 santorini 7ader" });
+        }); */
+}
     if(user2){
-    res.render('santorini', { user,error: "manta olt 3ayz tro7ha 5alas 3refna" }); }
+      
+    res.render('santorini', { user2,error: "manta olt 3ayz tro7ha 5alas 3refna" }); }
     });
 });
 
 app.post('/romego',function(req,res){
-  const user = req.app.locals.user ;
+  var user = req.app.locals.user ;
   const Collection = req.app.locals.collection ;  
   Collection.findOne({username : user.username , want_to_go : "rome" },function(err,user2){
     if(err) throw err ;
     if(!user2){ 
       Collection.updateMany({username:user.username}, { $push: { "want_to_go": "rome" } });
-      res.render('rome', { user,error: "Alf mabrook hateb2a troo7 rome 7ader" });}
+      app.locals.user.want_to_go.push("rome");
+      res.render('rome', { user,error: "Alf mabrook hateb2a troo7 rome 7ader" });
+      /* Collection.findOne({username : user.username },function(err,user3){
+        app.locals.user= user3 ;
+       // user = user3 ;
+       console.log(user3);
+        console.log(app.locals);
+        res.render('rome', { user,error: "Alf mabrook hateb2a troo7 rome 7ader" });
+        }); */
+}
     if(user2){
-    res.render('rome', { user,error: "manta olt 3ayz tro7ha 5alas 3refna" }); }
+    res.render('rome', { user2,error: "manta olt 3ayz tro7ha 5alas 3refna" }); }
     });
 });
 
 app.post('/annapurnago',function(req,res){
-  const user = req.app.locals.user ;
+  var user = req.app.locals.user ;
   const Collection = req.app.locals.collection ;  
   Collection.findOne({username : user.username , want_to_go : "annapurna" },function(err,user2){
     if(err) throw err ;
     if(!user2){ 
       Collection.updateMany({username:user.username}, { $push: { "want_to_go": "annapurna" } });
-      res.render('annapurna', { user,error: "Alf mabrook hateb2a troo7 rome 7ader, enta 3aref deh eh aslan" });}
+      app.locals.user.want_to_go.push("annapurna");
+      res.render('annapurna', { user,error: "Alf mabrook hateb2a troo7 annapurna 7ader, enta 3aref deh eh aslan" });
+      
+      /*   Collection.findOne({username : user.username },function(err,user3){
+      
+      
+        //app.locals.user= user3 ;
+     // user = user3 ;
+     console.log(user3);
+      console.log(app.locals);
+      res.render('annapurna', { user,error: "Alf mabrook hateb2a troo7 annapurna 7ader, enta 3aref deh eh aslan" });
+      }); */
+}
     if(user2){
+      
     res.render('annapurna', { user,error: "manta olt 3ayz tro7ha 5alas 3refna" }); }
     });
 });
 
 app.post('/homebutton',function(req,res){
-  const user = req.app.locals.user ;
+  var user = req.app.locals.user ;
+  //console.log(user.want_to_go.length);
   res.render('home',{user});
+  
 });
 
 app.get('/cities',function(req,res){
-  const user = req.app.locals.user ;
+  var user = req.app.locals.user ;
+ // console.log(user.want_to_go.length);
   res.render('cities',{user});
 });
 
 app.get('/error',function(req,res){
-  const user = req.app.locals.user ;
+  var user = req.app.locals.user ;
+  
   res.render('error',{user});
 });
 
 app.get('/hiking',function(req,res){
-  const user = req.app.locals.user ;
+  var user = req.app.locals.user ;
+ // console.log(user.want_to_go.length);
   res.render('hiking',{user});
 });
 
 app.get('/home',function(req,res){
-  const user = req.app.locals.user ;
+  var user = req.app.locals.user ;
   res.render('home',{user});
 });
 
 app.get('/annapurna',function(req,res){
-  const user = req.app.locals.user ;
+  var user = req.app.locals.user ;
+ // console.log(user.want_to_go.length);
   res.render('annapurna',{user,error:""});
 });
 
 app.get('/bali',function(req,res){
-  const user = req.app.locals.user ;
+  var user = req.app.locals.user ;
+ // console.log(user.want_to_go.length);
   res.render('bali',{user,error:""});
 });
 
 app.get('/inca',function(req,res){
-  const user = req.app.locals.user ;
+  var user = req.app.locals.user ;
+//  console.log(user.want_to_go.length);
   res.render('inca',{user,error:""});
 });
 
 app.get('/islands',function(req,res){
-  const user = req.app.locals.user ;
+  var user = req.app.locals.user ;
+ // console.log(user.want_to_go.length);
   res.render('islands',{user});
 });
 
 app.get('/paris',function(req,res){
-  const user = req.app.locals.user ;
+  var user = req.app.locals.user ;
   res.render('paris',{user,error:""});
 });
 
 app.get('/registration',function(req,res){
-  const user = req.app.locals.user ;
+  var user = req.app.locals.user ;
   res.render('registration',{error:""});
 });
 
 app.get('/rome',function(req,res){
-  const user = req.app.locals.user ;
+  var user = req.app.locals.user ;
+ // console.log(user.want_to_go.length);
   res.render('rome',{user,error:""});
 
 });
 
 app.get('/santorini',function(req,res){
-  const user = req.app.locals.user ;
+  var user = req.app.locals.user ;
   res.render('santorini',{user,error:""});
 });
 
 app.get('/searchresults',function(req,res){
-  const user = req.app.locals.user ;
-  res.render('searchresults',{user});
+  var user = req.app.locals.user ;
+  arr = [] ;
+  res.render('searchresults',{user,arr});
 });
 
 app.get('/wanttogo',function(req,res){
-  const user = req.app.locals.user ;
+  var user = req.app.locals.user ;
+
   res.render('wanttogo',{user});
 });
 
@@ -244,3 +315,29 @@ else{
 } 
 
 
+app.post('/search',function(req,res){
+  var text = req.body.Search ;
+  const user = req.app.locals.user ;
+  var filtered2 = new Array(6);
+  var array = ["Paris","Rome","Inca","Annapurna","Bali","Santorini"] ;
+  filtered = array.filter(array => array.includes(text));
+  if(filtered.includes("Inca")){
+    filtered2[0] = "Inca"
+  }
+  if(filtered.includes("Annapurna")){
+    filtered2[1] = "Annapurna"
+  }
+  if(filtered.includes("Paris")){
+    filtered2[2] = "Paris"
+  }
+  if(filtered.includes("Rome")){
+    filtered2[3] = "Rome"
+  }
+  if(filtered.includes("Santorini")){
+    filtered2[4] = "Santorini"
+  }
+  if(filtered.includes("Bali")){
+    filtered2[5] = "Bali"
+  }
+  res.render('searchresults',{user,filtered2});
+});
