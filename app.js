@@ -88,7 +88,7 @@ app.post('/baligo',function(req,res){
     if(!user2){ 
       Collection.updateMany({username:user.username}, { $push: { "want_to_go": "bali" } });
       app.locals.user.want_to_go.push("bali");
-      res.render('bali', { user,error: "Alf mabrook hateb2a troo7 bali 7ader" });
+      res.render('bali', { user,error: "Bali Successfully added to Your List" });
  /*      Collection.findOne({username : user.username },function(err,user3){
         app.locals.user = user3 ;
        // user = user3 ;
@@ -98,7 +98,7 @@ app.post('/baligo',function(req,res){
         }); */
 }
     if(user2){
-    res.render('bali', { user2,error: "manta olt 3ayz tro7ha 5alas 3refna" }); }
+    res.render('bali', { user2,error: "Bali already exists in your list !" }); }
     });
 });
 
@@ -110,7 +110,7 @@ app.post('/incago',function(req,res){
     if(!user2){ 
       Collection.updateMany({username:user.username}, { $push: { "want_to_go": "inca" } });
       app.locals.user.want_to_go.push("inca");
-      res.render('inca', { user,error: "Alf mabrook hateb2a troo7 inca 7ader" });
+      res.render('inca', { user,error: "Inca Successfully added to Your List" });
 /*       Collection.findOne({username : user.username },function(err,user3){
         app.locals.user= user3 ;
        // user = user3 ;
@@ -120,7 +120,7 @@ app.post('/incago',function(req,res){
         }); */
 }
     if(user2){
-    res.render('inca', { user2,error: "manta olt 3ayz tro7ha 5alas 3refna" }); }
+    res.render('inca', { user2,error: "Inca already exists in your list !" }); }
     });
 });
 
@@ -132,7 +132,7 @@ app.post('/parisgo',function(req,res){
     if(!user2){ 
       Collection.updateMany({username:user.username}, { $push: { "want_to_go": "paris" } });
       app.locals.user.want_to_go.push("paris");
-      res.render('paris', { user,error: "Alf mabrook hateb2a troo7 paris 7ader" });
+      res.render('paris', { user,error: "Paris Successfully added to Your List" });
 /*       Collection.findOne({username : user.username },function(err,user3){
         app.locals.user= user3 ;
        // user = user3 ;
@@ -142,7 +142,7 @@ app.post('/parisgo',function(req,res){
         }); */
 }
     if(user2){
-    res.render('paris', { user2,error: "manta olt 3ayz tro7ha 5alas 3refna" }); }
+    res.render('paris', { user2,error: "paris already exists in your list !" }); }
     });
 });
 
@@ -154,7 +154,7 @@ app.post('/santorinigo',function(req,res){
     if(!user2){ 
       Collection.updateMany({username:user.username}, { $push: { "want_to_go": "santorini" } });
       app.locals.user.want_to_go.push("santorini");
-      res.render('santorini', { user,error: "Alf mabrook hateb2a troo7 santorini 7ader" });
+      res.render('santorini', { user,error: "Santorini Successfully added to Your List" });
 /*       Collection.findOne({username : user.username },function(err,user3){
         app.locals.user= user3 ;
        // user = user3 ;
@@ -165,7 +165,7 @@ app.post('/santorinigo',function(req,res){
 }
     if(user2){
       
-    res.render('santorini', { user2,error: "manta olt 3ayz tro7ha 5alas 3refna" }); }
+    res.render('santorini', { user2,error: "Santorini already exists in your list !" }); }
     });
 });
 
@@ -177,7 +177,7 @@ app.post('/romego',function(req,res){
     if(!user2){ 
       Collection.updateMany({username:user.username}, { $push: { "want_to_go": "rome" } });
       app.locals.user.want_to_go.push("rome");
-      res.render('rome', { user,error: "Alf mabrook hateb2a troo7 rome 7ader" });
+      res.render('rome', { user,error: "Rome Successfully added to Your List" });
       /* Collection.findOne({username : user.username },function(err,user3){
         app.locals.user= user3 ;
        // user = user3 ;
@@ -187,7 +187,7 @@ app.post('/romego',function(req,res){
         }); */
 }
     if(user2){
-    res.render('rome', { user2,error: "manta olt 3ayz tro7ha 5alas 3refna" }); }
+    res.render('rome', { user2,error: "Rome already exists in your list !" }); }
     });
 });
 
@@ -199,7 +199,7 @@ app.post('/annapurnago',function(req,res){
     if(!user2){ 
       Collection.updateMany({username:user.username}, { $push: { "want_to_go": "annapurna" } });
       app.locals.user.want_to_go.push("annapurna");
-      res.render('annapurna', { user,error: "Alf mabrook hateb2a troo7 annapurna 7ader, enta 3aref deh eh aslan" });
+      res.render('annapurna', { user,error: "Annapurna Successfully added to Your List" });
       
       /*   Collection.findOne({username : user.username },function(err,user3){
       
@@ -213,7 +213,7 @@ app.post('/annapurnago',function(req,res){
 }
     if(user2){
       
-    res.render('annapurna', { user,error: "manta olt 3ayz tro7ha 5alas 3refna" }); }
+    res.render('annapurna', { user,error: "Annapurna already exists in your list !" }); }
     });
 });
 
