@@ -82,6 +82,7 @@ app.post('/login',function(req,res){
 
 app.post('/baligo',function(req,res){
   var user = req.app.locals.user ;
+
   const Collection = req.app.locals.collection ;  
   Collection.findOne({username : user.username , want_to_go : "bali" },function(err,user2){
     if(err) throw err ;
@@ -226,63 +227,93 @@ app.post('/homebutton',function(req,res){
 
 app.get('/cities',function(req,res){
   var user = req.app.locals.user ;
+  if(typeof user === 'undefined'){
+    return res.render('login',{error : "You need to Login first to access this Page !"});
+  }
  // console.log(user.want_to_go.length);
   res.render('cities',{user});
 });
 
 app.get('/error',function(req,res){
   var user = req.app.locals.user ;
-  
+  if(typeof user === 'undefined'){
+    return res.render('login',{error : "You need to Login first to access this Page !"});
+  }
   res.render('error',{user});
 });
 
 app.get('/hiking',function(req,res){
   var user = req.app.locals.user ;
+  if(typeof user === 'undefined'){
+    return res.render('login',{error : "You need to Login first to access this Page !"});
+  }
  // console.log(user.want_to_go.length);
   res.render('hiking',{user});
 });
 
 app.get('/home',function(req,res){
   var user = req.app.locals.user ;
+  if(typeof user === 'undefined'){
+    return res.render('login',{error : "You need to Login first to access this Page !"});
+  }
   res.render('home',{user});
 });
 
 app.get('/annapurna',function(req,res){
   var user = req.app.locals.user ;
+  if(typeof user === 'undefined'){
+    return res.render('login',{error : "You need to Login first to access this Page !"});
+  }
  // console.log(user.want_to_go.length);
   res.render('annapurna',{user,error:""});
 });
 
 app.get('/bali',function(req,res){
   var user = req.app.locals.user ;
- // console.log(user.want_to_go.length);
+  if(typeof user === 'undefined'){
+    return res.render('login',{error : "You need to Login first to access this Page !"});
+  }
+  console.log(user);
   res.render('bali',{user,error:""});
 });
 
 app.get('/inca',function(req,res){
   var user = req.app.locals.user ;
 //  console.log(user.want_to_go.length);
+if(typeof user === 'undefined'){
+  return res.render('login',{error : "You need to Login first to access this Page !"});
+}
   res.render('inca',{user,error:""});
 });
 
 app.get('/islands',function(req,res){
   var user = req.app.locals.user ;
+  if(typeof user === 'undefined'){
+    return res.render('login',{error : "You need to Login first to access this Page !"});
+  }
  // console.log(user.want_to_go.length);
   res.render('islands',{user});
 });
 
 app.get('/paris',function(req,res){
   var user = req.app.locals.user ;
+  if(typeof user === 'undefined'){
+    return res.render('login',{error : "You need to Login first to access this Page !"});
+  }
   res.render('paris',{user,error:""});
 });
 
 app.get('/registration',function(req,res){
   var user = req.app.locals.user ;
+  
   res.render('registration',{error:""});
 });
 
 app.get('/rome',function(req,res){
   var user = req.app.locals.user ;
+  if(typeof user === 'undefined'){
+    return res.render('login',{error : "You need to Login first to access this Page !"});
+  }
  // console.log(user.want_to_go.length);
   res.render('rome',{user,error:""});
 
@@ -290,18 +321,26 @@ app.get('/rome',function(req,res){
 
 app.get('/santorini',function(req,res){
   var user = req.app.locals.user ;
+  if(typeof user === 'undefined'){
+    return res.render('login',{error : "You need to Login first to access this Page !"});
+  }
   res.render('santorini',{user,error:""});
 });
 
 app.get('/searchresults',function(req,res){
   var user = req.app.locals.user ;
+  if(typeof user === 'undefined'){
+    return res.render('login',{error : "You need to Login first to access this Page !"});
+  }
   arr = [] ;
   res.render('searchresults',{user,arr});
 });
 
 app.get('/wanttogo',function(req,res){
   var user = req.app.locals.user ;
-
+  if(typeof user === 'undefined'){
+    return res.render('login',{error : "You need to Login first to access this Page !"});
+  }
   res.render('wanttogo',{user});
 });
 
@@ -317,10 +356,11 @@ else{
 
 app.post('/search',function(req,res){
   var text = req.body.Search ;
+  var error = "";
   const user = req.app.locals.user ;
   var filtered2 = new Array(6);
   var array = ["Paris","Rome","Inca","Annapurna","Bali","Santorini"] ;
-  filtered = array.filter(array => array.includes(text));
+  var filtered = array.filter(array => array.includes(text));
   if(filtered.includes("Inca")){
     filtered2[0] = "Inca"
   }
@@ -339,5 +379,11 @@ app.post('/search',function(req,res){
   if(filtered.includes("Bali")){
     filtered2[5] = "Bali"
   }
-  res.render('searchresults',{user,filtered2});
+  if (filtered.length === 0){
+    error = "No results Found !";
+    
+  }
+ 
+
+  res.render('searchresults',{user,filtered2,error});
 });
