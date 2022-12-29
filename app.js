@@ -20,8 +20,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 MongoClient.connect("mongodb+srv://admin:admin@cluster0.rtyfifa.mongodb.net/test", function (err, client) {
     if (err) throw err ;
 
-    const db = client.db('new') ;
-    const collection = db.collection('collection1');
+    const db = client.db('myDB') ;
+    const collection = db.collection('myCollection');
     app.locals.collection = collection ; } ) 
 
 
